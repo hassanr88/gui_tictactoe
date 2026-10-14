@@ -39,6 +39,20 @@ fn window_conf() -> Conf {
 
 #[macroquad::main(window_conf)]
 async fn main() {
+    async fn handle_button_click(btn: &mut ImageButton, player: &mut bool) {
+    if *player == true {
+        *player = false;
+        btn.set_image("assets/x.png", "assets/x.png").await;
+        btn.enabled = false;
+    } else {
+        *player = true;
+        btn.set_image("assets/o.png", "assets/o.png").await;
+        btn.enabled = false;
+    }
+}
+    let mut player = true;
+    let mut player_score1 = 0;
+    let mut player_score2 = 0;
     let mut btn_reset = TextButton::new(250.0, 700.0, 150.0, 50.0, "Reset", GRAY, RED, 30);
     let mut btn_exit = TextButton::new(650.0, 700.0, 150.0, 50.0, "Exit", GRAY, RED, 30);
     let lbl_score = Label::new("Score: 0 - 0", 445.0, 700.0, 30);
@@ -129,34 +143,34 @@ async fn main() {
         clear_background(WHITE);
         //draw_grid(50.0, BROWN);
         if btn_img_1.click() {
-
+            handle_button_click(&mut btn_img_1, &mut player).await;
         }
         if btn_img_2.click() {
-            
+            handle_button_click(&mut btn_img_2, &mut player).await;
         }
         if btn_img_3.click() {
-            
+            handle_button_click(&mut btn_img_3, &mut player).await;
         }
         if btn_img_4.click() {
-            
+            handle_button_click(&mut btn_img_4, &mut player).await;
         }
         if btn_img_5.click() {
-            
+            handle_button_click(&mut btn_img_5, &mut player).await;
         }
         if btn_img_6.click() {
-            
+            handle_button_click(&mut btn_img_6, &mut player).await;
         }
         if btn_img_7.click() {
-            
+            handle_button_click(&mut btn_img_7, &mut player).await;
         }
         if btn_img_8.click() {
-            
+            handle_button_click(&mut btn_img_8, &mut player).await;
         }
         if btn_img_9.click() {
-            
+            handle_button_click(&mut btn_img_9, &mut player).await;
         }
         if btn_reset.click() {
-
+            
         }
         if btn_exit.click() {
             break;
