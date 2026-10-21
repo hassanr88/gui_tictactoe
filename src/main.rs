@@ -20,11 +20,13 @@ use crate::ui::grid::draw_grid;
 use crate::ui::image_button::ImageButton;
 use crate::ui::label::Label;
 use crate::ui::text_button::TextButton;
+use crate::utils::preload_image::TextureManager;
 use core::num;
 use std::fmt::format;
 
 use macroquad::miniquad::CursorIcon::Text;
 use macroquad::prelude::*;
+
 
 /// Set up window settings before the app runs
 fn window_conf() -> Conf {
@@ -126,6 +128,8 @@ async fn main() {
         .await,
     ];
 
+    let tm = TextureManager::new();
+    tm.preload_all(&["assets/x.png", "assets/o.png", "assets/white.png"]).await;
     let mut btn_reset = TextButton::new(250.0, 700.0, 150.0, 50.0, "Reset", GRAY, RED, 30);
     let mut btn_exit = TextButton::new(650.0, 700.0, 150.0, 50.0, "Exit", GRAY, RED, 30);
     let mut player = true;
